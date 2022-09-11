@@ -1,24 +1,5 @@
-# README
+# Reitbiier
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+CS project for Uni Helsinki.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+[Application running on fly.io](https://reitbiier.fly.dev/)
