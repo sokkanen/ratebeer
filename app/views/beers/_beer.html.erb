@@ -18,8 +18,7 @@
     <% else %>
       <p>
       Beer has 
-      <%= beer.ratings.length %>
-      ratings with an average of
+      <%=pluralize(beer.ratings.length, 'rating')%> with an average of
       <%= beer.average_rating %>
       </p>
     <% end %>
