@@ -7,4 +7,9 @@ class Beer < ApplicationRecord
             count += rating.score
         end / self.ratings.length
     end
+
+    def to_s
+        return "#{self.brewery.name}: #{self.name}"
+    end
+
 end
