@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module RatingAverage
-    extend ActiveSupport::Concern
-    
-    def average_rating
-        return self.ratings.inject(0.0) do |count, rating|
-            count += rating.score
-        end / self.ratings.length
-    end
+  extend ActiveSupport::Concern
+
+  def average_rating
+    return 0 if ratings.empty?
+
+    ratings.map(&:score).sum / ratings.count.to_f
+  end
 end

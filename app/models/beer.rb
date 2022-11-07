@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 class Beer < ApplicationRecord
-    include RatingAverage
-    
-    belongs_to :brewery
-    has_many :ratings, dependent: :destroy
+  include RatingAverage
 
-    def to_s
-        return "#{self.brewery.name}: #{self.name}"
-    end
+  belongs_to :brewery
+  has_many :ratings, dependent: :destroy
 
+  def to_s
+    "#{brewery.name}: #{name}"
+  end
 end
