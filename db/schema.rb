@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -12,26 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_220_915_232_223) do
-  create_table 'beers', force: :cascade do |t|
-    t.string 'name'
-    t.string 'style'
-    t.integer 'brewery_id'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+ActiveRecord::Schema[7.0].define(version: 2022_11_08_192547) do
+  create_table "beers", force: :cascade do |t|
+    t.string "name"
+    t.string "style"
+    t.integer "brewery_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table 'breweries', force: :cascade do |t|
-    t.string 'name'
-    t.integer 'year'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "breweries", force: :cascade do |t|
+    t.string "name"
+    t.integer "year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table 'ratings', force: :cascade do |t|
-    t.integer 'score'
-    t.integer 'beer_id'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "ratings", force: :cascade do |t|
+    t.integer "score"
+    t.integer "beer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
 end
