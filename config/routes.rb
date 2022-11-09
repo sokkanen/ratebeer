@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :memberships
+  resources :beer_clubs
   root 'breweries#index'
 
   resources :users

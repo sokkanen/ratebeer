@@ -17,6 +17,16 @@
 </li>
 <br>
 
+<h5>Beer Club Memberships:</h5>
+<p>
+  <% @user.beer_clubs.each do |club| %>
+    <div>
+      <%= link_to club.name, club %>
+    </div>
+  <% end %>
+</p>
+
+
 <div>
   <%= link_to "Edit this user", edit_user_path(@user) %> |
   <%= link_to "Back to users", users_path %>
