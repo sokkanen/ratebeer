@@ -24,7 +24,7 @@ class RatingsController < ApplicationController
 
   def destroy
     rating = Rating.find(params[:id])
-    rating.delete
-    redirect_to ratings_path
+    rating.delete unless rating.user != current_user
+    redirect_to current_user, status: 303
   end
 end
