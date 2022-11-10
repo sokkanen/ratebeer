@@ -1,6 +1,6 @@
 class MembershipsController < ApplicationController
-  before_action :set_membership, only: %i[ show edit update destroy ]
-  before_action :set_clubs, only: %i[ new ]
+  before_action :set_membership, only: %i[show edit update destroy]
+  before_action :set_clubs, only: %i[new]
 
   # GET /memberships or /memberships.json
   def index
@@ -14,9 +14,9 @@ class MembershipsController < ApplicationController
   # GET /memberships/new
   def new
     @membership = Membership.new
-    if current_user.nil?
-      redirect_to beer_clubs_path
-    end
+    return unless current_user.nil?
+
+    redirect_to beer_clubs_path
   end
 
   # GET /memberships/1/edit
@@ -63,22 +63,23 @@ class MembershipsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_membership
-      @membership = Membership.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def membership_params
-      params.require(:membership).permit(:beer_club_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_membership
+    @membership = Membership.find(params[:id])
+  end
 
-    def set_clubs
-      @beerclubs = []
-      BeerClub.all.each { |club| 
-        unless club.members.include?(current_user)
-          @beerclubs << club
-        end
-      }
-    end
+  # Only allow a list of trusted parameters through.
+  def membership_params
+    params.require(:membership).permit(:beer_club_id)
+  end
+
+  def set_clubs
+    @beerclubs = []
+    BeerClub.all.each { |club|
+      unless club.members.include?(current_user)
+        @beerclubs << club
+      end
+    }
+  end
 end
