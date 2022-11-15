@@ -10,4 +10,35 @@ class User < ApplicationRecord
   has_many :beers, through: :ratings
   has_many :memberships, dependent: :destroy
   has_many :beer_clubs, through: :memberships
+
+  def favorite_beer
+    return nil if ratings.empty?
+
+    ratings.order(score: :desc).limit(1).first.beer
+  end
+
+  def favorite_style
+    highest = [0.0, nil]
+    beers.map(&:style).uniq.each do |style|
+      highest = get_avg_for_and_return_highest(style, highest, true)
+    end
+    highest[1]
+  end
+
+  def favorite_brewery
+    highest = [0.0, nil]
+    beers.map(&:brewery).uniq.each do |brewery|
+      highest = get_avg_for_and_return_highest(brewery, highest, false)
+    end
+    highest[1]
+  end
+
+  private
+
+  def get_avg_for_and_return_highest(object, storage, style)
+    all = ratings.find_all{ |r| style ? r.beer.style == object : r.beer.brewery == object }
+    avg = all.empty? ? return : all.map(&:score).sum / all.count.to_f
+    storage = [avg, object] unless avg < storage[0]
+    storage
+  end
 end
