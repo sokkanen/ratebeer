@@ -83,4 +83,5 @@ group :test do
   gem 'webdrivers'
   gem 'factory_bot_rails'
   gem 'launchy'
+  gem 'simplecov', require: false
 end
