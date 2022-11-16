@@ -50,6 +50,7 @@ jobs:
       - name: Run tests
         run: bundle exec rspec
   deploy:
+      needs: [lint, test]
       name: Deploy app
       runs-on: ubuntu-latest
       steps:
