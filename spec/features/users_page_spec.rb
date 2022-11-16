@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'pp'
 
 include Helpers
 
@@ -55,8 +56,8 @@ describe "User" do
 
     it "removing rating removes it from the database" do
       Capybara.default_max_wait_time = 5
-      puts page.body
       sign_in(username: "Kimmo", password: "Foobar1")
+      pp page.body
       expect{
         page.find_by_id('delete_rating_1').click
       }.to change{Rating.count}.by(-1)
