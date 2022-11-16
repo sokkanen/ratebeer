@@ -54,8 +54,9 @@ describe "User" do
     end
 
     it "removing rating removes it from the database" do
+      Capybara.default_max_wait_time = 5
+      puts page.body
       sign_in(username: "Kimmo", password: "Foobar1")
-      puts page
       expect{
         page.find_by_id('delete_rating_1').click
       }.to change{Rating.count}.by(-1)
