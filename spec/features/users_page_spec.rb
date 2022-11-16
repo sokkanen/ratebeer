@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'pp'
 
 include Helpers
 
@@ -9,7 +8,7 @@ describe "User" do
   let!(:user) { FactoryBot.create :user, username: 'Kimmo' }
   let!(:user2) { FactoryBot.create :user, username: "Keijo" }
   before :each do
-    FactoryBot.create(:rating, score: 20, beer: beer1, user: user)
+    @rating1 = FactoryBot.create(:rating, score: 20, beer: beer1, user: user)
     FactoryBot.create(:rating, score: 15, beer: beer1, user: user)
     FactoryBot.create(:rating, score: 25, beer: beer1, user: user2)
   end
@@ -57,9 +56,8 @@ describe "User" do
     it "removing rating removes it from the database" do
       Capybara.default_max_wait_time = 5
       sign_in(username: "Kimmo", password: "Foobar1")
-      pp page.body
       expect{
-        page.find_by_id('delete_rating_1').click
+        page.find_by_id("delete_rating_#{@rating1.id}").click
       }.to change{Rating.count}.by(-1)
     end
   end
