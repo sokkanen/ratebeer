@@ -20,7 +20,7 @@
     <li>
       <%= rating.to_s %>
       <% if @user == current_user %>
-        <%= link_to 'delete', rating, data: { "turbo-method": :delete } %>
+        <%= link_to 'delete', rating, id: "delete_rating_#{rating.id}", data: { "turbo-method": :delete } %>
       <% end %>
     </li>
   <% end %>
