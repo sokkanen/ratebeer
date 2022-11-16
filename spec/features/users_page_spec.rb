@@ -55,6 +55,7 @@ describe "User" do
 
     it "removing rating removes it from the database" do
       sign_in(username: "Kimmo", password: "Foobar1")
+      puts page
       expect{
         page.find_by_id('delete_rating_1').click
       }.to change{Rating.count}.by(-1)
