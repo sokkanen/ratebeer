@@ -35,3 +35,5 @@
 /config/master.key
 
 pg_credentials
+
+beer_mapping_api_key

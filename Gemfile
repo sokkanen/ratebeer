@@ -20,6 +20,8 @@ group :production do
   gem 'pg'
 end
 
+gem 'httparty'
+
 # Bcrypt
 gem 'bcrypt', '~> 3.1.7'
 
