@@ -11,7 +11,7 @@ class BeerClubsController < ApplicationController
   def show
     @membership = Membership.new
     @membership.beer_club_id = params[:id]
-    puts @membership
+    @current_membership = get_membership(current_user.id, params[:id]) unless current_user.nil?
   end
 
   # GET /beer_clubs/new
@@ -62,6 +62,10 @@ class BeerClubsController < ApplicationController
   end
 
   private
+
+  def get_membership(user_id, beer_club_id)
+    Membership.find_by user_id:, beer_club_id:
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_beer_club

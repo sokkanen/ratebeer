@@ -22,6 +22,10 @@
         <%= form.hidden_field :beer_club_id, value: @beer_club.id %>
         <%= form.submit "Join!" %>
       <% end %>
+    <% else %>
+      <%= form_with(model: @current_membership, method: :delete) do |form| %>
+        <%= form.submit "End the membership" %>
+      <% end %>
     <% end %>
     <br>
 
