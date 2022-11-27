@@ -1,6 +1,31 @@
 require 'rails_helper'
 
 describe "Places" do
+
+  before :each do
+    mock_weather = {
+      "observation_time"=>"10:01 PM",                                                          
+      "temperature"=>10,                                                                       
+      "weather_code"=>296,                                                                     
+      "weather_icons"=>["https://cdn.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0033_cloudy_with_light_rain_night.png"],
+      "weather_descriptions"=>["Light Rain, Mist"],                                            
+      "wind_speed"=>13,                                                                        
+      "wind_degree"=>190,                                                                      
+      "wind_dir"=>"S",                                                                         
+      "pressure"=>1001,                                                                        
+      "precip"=>0,                                                                             
+      "humidity"=>89,
+      "cloudcover"=>100,
+      "feelslike"=>8,
+      "uv_index"=>1,
+      "visibility"=>6,
+      "is_day"=>"no"
+    }
+    allow(WeatherstackApi).to receive(:weather_in).with("kumpula").and_return(mock_weather)
+    allow(WeatherstackApi).to receive(:weather_in).with("rajis").and_return(mock_weather)
+    allow(WeatherstackApi).to receive(:weather_in).with("vaarala").and_return(mock_weather)
+  end
+
   it "if one is returned by the API, it is shown at the page" do
     allow(BeermappingApi).to receive(:places_in).with("kumpula").and_return(
       [ Place.new( name: "Oljenkorsi", id: 1 ) ]

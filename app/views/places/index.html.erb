@@ -8,6 +8,8 @@
 <% end %>
 
 <% if @places %>
+  <br>
+  <%= render partial: 'weather', :object => @weather %>
   <table>
     <thead>
       <% Place.rendered_fields.each do |field| %>

@@ -1,0 +1,11 @@
+<div>
+    <h3>Current beer weather in <%= @latest %></h3>
+    <%@weather['weather_descriptions'].each do |desc|%>
+        <p><%=desc%></p>
+    <% end %>
+    <h5><%= @weather['temperature'] %> Celsius</h5>
+    <%@weather['weather_icons'].each do |url|%>
+        <%= image_tag image_url(url) %>
+    <% end %>
+    <h5>Wind <%= @weather['wind_speed'] %> m/s, direction <%= @weather['wind_dir'] %></h5>
+</div>

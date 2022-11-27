@@ -483,6 +483,29 @@
           null
         ]
       },
+      "/home/joel/HYCS_opiskelu/MSC/ROR/ratebeer/lib/weatherstack_api.rb": {
+        "lines": [
+          1,
+          1,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null
+        ]
+      },
       "/home/joel/HYCS_opiskelu/MSC/ROR/ratebeer/lib/beermapping_api.rb": {
         "lines": [
           1,
@@ -532,22 +555,29 @@
           1,
           0,
           0,
+          0,
           null,
           0,
           null,
           null,
           1,
+          3,
+          3,
           3,
           3,
           3,
           1,
           null,
           2,
+          2,
           null,
           null,
           null,
           1,
-          0,
+          2,
+          null,
+          null,
+          1,
           0,
           null,
           null
@@ -850,6 +880,7 @@
           null,
           0,
           null,
+          null,
           0,
           0,
           0,
@@ -891,6 +922,6 @@
         }
       }
     },
-    "timestamp": 1669550912
+    "timestamp": 1669587248
   }
 }
