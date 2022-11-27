@@ -39,8 +39,8 @@ class User < ApplicationRecord
 
   private
 
-  def get_avg_for_and_return_highest(object, storage, style)
-    all = ratings.find_all{ |r| style ? r.beer.style == object : r.beer.brewery == object }
+  def get_avg_for_and_return_highest(object, storage, is_style)
+    all = ratings.find_all{ |r| is_style ? r.beer.style == object : r.beer.brewery == object }
     avg = all.empty? ? return : all.map(&:score).sum / all.count.to_f
     storage = [avg, object] unless avg < storage[0]
     storage

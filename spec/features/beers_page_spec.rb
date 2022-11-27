@@ -16,6 +16,10 @@ describe "Beers page" do
       @breweries.each do |brewery_name|
         FactoryBot.create(:brewery, name: brewery_name, year: year += 1)
       end
+      @styles = ["Lager", "IPA"]
+      @styles.each do |style_name|
+        FactoryBot.create(:style, name: style_name, description: "")
+      end
       sign_in(username: "Pekka", password: "Foobar1")
       visit beers_path
     end

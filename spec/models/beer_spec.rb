@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.describe Beer, type: :model do
   describe "with erroneous properties" do
     let(:test_brewery) { Brewery.new name: "test", year: 2000 }
+    let(:test_style) { Style.new name: "test_style", description: 'Testing...' }
     it "is not saved without a name" do
-      beer = Beer.create style: "teststyle", brewery: test_brewery
+      beer = Beer.create style: test_style, brewery: test_brewery
 
       expect(beer).not_to be_valid
       expect(Beer.count).to eq(0)
@@ -19,9 +20,10 @@ RSpec.describe Beer, type: :model do
   end
   describe "with a proper attributes" do
     let(:test_brewery) { Brewery.new name: "test", year: 2000 }
+    let(:test_style) { Style.new name: "test_style", description: 'Testing...' }
 
     it "is saved" do
-      beer = Beer.create style: "teststyle", brewery: test_brewery, name: "testbeer"
+      beer = Beer.create brewery: test_brewery, style: test_style, name: "testbeer"
 
       expect(beer).to be_valid
       expect(Beer.count).to eq(1)
