@@ -15,8 +15,14 @@
   <% if @beerclubs.length == 0%>
       <p>No clubs to join.</p>
   <% else %>
-    <%= f.select :beer_club_id, options_from_collection_for_select(@beerclubs, :id, :name) %>
-    <%= f.submit "Join the club!" %>
+  <form>
+    <div class="mb-3">
+      <%= f.select :beer_club_id, options_from_collection_for_select(@beerclubs, :id, :name), {}, { :class => "form-select" } %>
+    </div>
+    <div class="mb-3">
+      <%= f.submit "Join the club!", { :class => "btn btn-primary" } %>
+    </div>
+  </form>
   <%end%>
 
   <div>

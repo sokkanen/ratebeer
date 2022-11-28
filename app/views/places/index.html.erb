@@ -1,22 +1,24 @@
 <h1>Beer places search</h1>
-
-<p id="notice"><%= notice %></p>
-
 <%= form_with url: places_path, method: :post do |form| %>
-  city <%= form.text_field :city %>
-  <%= form.submit "Search" %>
+<div class="input-group mb-3">
+  <%= form.text_field :city, { class:"form-control", placeholder:"City" } %>
+  <%= form.submit "Search", { class:"btn btn-outline-secondary" } %>
+</div>
 <% end %>
 
 <% if @places %>
   <br>
   <%= render partial: 'weather', :object => @weather %>
-  <table>
-    <thead>
+  <table class="table">
+  <thead>
+    <tr>
       <% Place.rendered_fields.each do |field| %>
         <th><%= field %></th>
       <% end %>
-    </thead>
-    <% @places.each do |place| %>
+    </tr>
+  </thead>
+  <tbody>
+  <% @places.each do |place| %>
       <tr>
         <% Place.rendered_fields.each do |field| %>
           <% if field.to_s == 'name' %>
@@ -27,5 +29,6 @@
         <% end %>
       </tr>
     <% end %>
-  </table>
+  </tbody>
+</table>
 <% end %>

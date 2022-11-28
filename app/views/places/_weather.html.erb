@@ -1,11 +1,15 @@
-<div>
-    <h3>Current beer weather in <%= @latest %></h3>
-    <%@weather['weather_descriptions'].each do |desc|%>
-        <p><%=desc%></p>
-    <% end %>
-    <h5><%= @weather['temperature'] %> Celsius</h5>
+<div class="card" style="width: 50%;">
     <%@weather['weather_icons'].each do |url|%>
-        <%= image_tag image_url(url) %>
+        <%= image_tag image_url(url), {class:"card-img-top"} %>
     <% end %>
-    <h5>Wind <%= @weather['wind_speed'] %> m/s, direction <%= @weather['wind_dir'] %></h5>
+  <div class="card-body">
+    <h5 class="card-title">Current beer weather in <%= @latest %></h5>
+    <ul class="list-group list-group-flush">
+      <%@weather['weather_descriptions'].each do |desc|%>
+        <li class="list-group-item"><p class="card-text"><%=desc%></p></li>
+      <% end %>
+      <li class="list-group-item"><p class="card-text"><%= @weather['temperature'] %> Celsius</p></li>
+      <li class="list-group-item"><p class="card-text">Wind <%= @weather['wind_speed'] %> m/s, direction <%= @weather['wind_dir'] %></p></li>
+    </ul>
+  </div>
 </div>
