@@ -2,6 +2,7 @@
 
 class Beer < ApplicationRecord
   include RatingAverage
+  include TopN
 
   validates :name, :style, presence: true
 

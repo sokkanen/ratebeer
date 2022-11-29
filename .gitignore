@@ -38,3 +38,4 @@ pg_credentials
 
 beer_mapping_api_key
 weatherstack_api_key
+keys.sh
