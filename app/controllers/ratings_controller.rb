@@ -2,12 +2,7 @@
 
 class RatingsController < ApplicationController
   def index
-    @ratings = Rating.all
-    @recent = Rating.recent
-    @top_beers = Beer.top 3
-    @top_breweries = Brewery.top 3
-    @top_styles = Style.top 3
-    @most_active = User.most_active
+    set_variables
   end
 
   def new
@@ -31,5 +26,14 @@ class RatingsController < ApplicationController
     rating = Rating.find(params[:id])
     rating.delete unless rating.user != current_user
     redirect_to current_user, status: 303
+  end
+
+  def set_variables
+    @ratings = Rating.all
+    @recent = Rating.recent
+    @top_beers = Beer.top 3
+    @top_breweries = Brewery.top 3
+    @top_styles = Style.top 3
+    @most_active = User.most_active
   end
 end

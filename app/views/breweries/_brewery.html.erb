@@ -22,7 +22,7 @@
       <p>
       Brewery's beers have 
       <%=pluralize(brewery.ratings.length, 'rating')%> with an average of
-      <%= brewery.average_rating %>
+      <%= round(brewery.average_rating) %>
       </p>
   <% end %>
 </div>

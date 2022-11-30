@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :memberships, dependent: :destroy
   has_many :beer_clubs, through: :memberships
 
-  scope :most_active, -> { scope :recent, -> { order(created_at: :desc).limit(3) } }
+  scope :most_active, -> { order(created_at: :asc).limit(3) }
 
   def favorite_beer
     return nil if ratings.empty?
