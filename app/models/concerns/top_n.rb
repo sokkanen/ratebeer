@@ -5,8 +5,8 @@ module TopN
   end
 
   module ClassMethods
-    def top(n)
-      all.sort_by(&:average_rating).reverse!.take(n)
+    def top(number)
+      all.sort_by(&:average_rating).reverse!.take(number)
     end
   end
 end

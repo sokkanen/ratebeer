@@ -1,10 +1,19 @@
 <div>
     <h2>Top 3 <%= type %></h2>
-    <ol>
-    <% list.each do |t| %>
-        <li> 
-            <%= t.name %>  
-        </li>
-    <% end %>
-    </ol>
+    <div class="container text-center">
+            <ol>
+            <% list.each do |t| %>
+                <li> 
+                <div class="row">
+                    <div class="col-sm-8">
+                        <%="#{t.name}"%> 
+                    </div>
+                    <div class="col-sm-4">
+                        <%="#{t.average_rating}"%> 
+                    </div>
+                    </div>
+                </li>
+            <% end %>
+            </ol>
+    </div>
 </div>
