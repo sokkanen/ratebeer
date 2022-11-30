@@ -28,7 +28,7 @@
             <td>
             Beer has 
             <%=pluralize(beer.ratings.length, 'rating')%> with an average of
-            <%= beer.average_rating %>
+            <%= round(beer.average_rating) %>
             </td>
           <% end %>
       <tr>
