@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
+  before_action :ensure_that_is_admin, only: [:change_status]
 
   # GET /users or /users.json
   def index
@@ -23,6 +24,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.admin = false
+    @user.closed = false
 
     respond_to do |format|
       if @user.save
@@ -53,6 +55,15 @@ class UsersController < ApplicationController
     @user.destroy unless @user != current_user
     session[:user_id] = nil
     redirect_to :root, notice: "User was successfully destroyed."
+  end
+
+  def change_status
+    puts "PERKELE #{params[:id]}"
+    user = User.find(params[:id])
+    user.update_attribute :closed, (not user.closed)
+
+    new_status = user.closed ? "closed" : "active"
+    redirect_to user, notice:"User status changed to #{new_status}"
   end
 
   private

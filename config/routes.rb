@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   root 'breweries#index'
 
   resources :users
+  resources :users do
+    post 'change_status', on: :member
+  end
   resources :beers
   resources :breweries
   resources :breweries do

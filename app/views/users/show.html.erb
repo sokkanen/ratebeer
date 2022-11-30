@@ -2,6 +2,9 @@
   <strong>Username:</strong>
   <%= @user.username %>
 </p>
+<% if is_admin && @user.closed  %>
+  <span class="badge bg-secondary">closed</span>
+<% end %>
 <p>Has made <%= @user.ratings.count%> ratings, average rating <%= round(@user.average_rating)%></p>
 
 <% if @user.favorite_style %>
@@ -41,4 +44,10 @@
     <%= button_to "Destroy this user", @user, method: :delete %>
   <% end %>
   <%= link_to "Back to users", users_path %>
+</div>
+
+<div>
+  <% if current_user.admin %>  
+    <%= link_to "#{ @user.closed ? "Open" : "Close" } user account", change_status_user_path(@user.id), data: {turbo_method: "post"}, class: "btn btn-warning" %>
+  <% end %>
 </div>
