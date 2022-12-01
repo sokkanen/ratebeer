@@ -2,7 +2,7 @@
   <strong>Username:</strong>
   <%= @user.username %>
 </p>
-<% if is_admin && @user.closed  %>
+<% if admin_logged_in && @user.closed  %>
   <span class="badge bg-secondary">closed</span>
 <% end %>
 <p>Has made <%= @user.ratings.count%> ratings, average rating <%= round(@user.average_rating)%></p>
@@ -47,7 +47,7 @@
 </div>
 
 <div>
-  <% if current_user.admin %>  
+  <% if current_user && current_user.admin %>  
     <%= link_to "#{ @user.closed ? "Open" : "Close" } user account", change_status_user_path(@user.id), data: {turbo_method: "post"}, class: "btn btn-warning" %>
   <% end %>
 </div>

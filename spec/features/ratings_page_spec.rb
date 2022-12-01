@@ -31,7 +31,7 @@ describe "Rating" do
 
   it "number of ratings if shown on the page" do
     visit ratings_path
-    expect(page).to have_content 'List of ratings'
+    expect(page).to have_content 'Ratings'
     expect(page).to have_content 'Total number of ratings: 3'
   end
 end

@@ -41,7 +41,7 @@ describe "User" do
 
     it "individual page shows only user's own ratings" do
       sign_in(username: "Kimmo", password: "Foobar1")
-      expect(page).to have_content 'Has made 2 ratings, average rating 17.5.'
+      expect(page).to have_content 'Has made 2 ratings, average rating 17.5'
       expect(page).to have_content 'iso 3 15'
       expect(page).to have_content 'iso 3 20'
       expect(page).not_to have_content 'iso 3 25'

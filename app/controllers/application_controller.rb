@@ -2,7 +2,7 @@
 
 class ApplicationController < ActionController::Base
   helper_method :current_user
-  helper_method :is_admin
+  helper_method :admin_logged_in
 
   def current_user
     return nil if session[:user_id].nil?
@@ -10,9 +10,10 @@ class ApplicationController < ActionController::Base
     User.find(session[:user_id])
   end
 
-  def is_admin
+  def admin_logged_in
     return nil if current_user.nil?
-    return current_user.admin == true
+
+    current_user.admin == true
   end
 
   def ensure_that_signed_in
