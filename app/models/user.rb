@@ -39,6 +39,10 @@ class User < ApplicationRecord
     !memberships.select { |membership| membership.beer_club_id == beer_club_id }.empty?
   end
 
+  def full_member_of?(beer_club_id)
+    !memberships.select { |membership| membership.beer_club_id == beer_club_id && membership.confirmed }.empty?
+  end
+
   private
 
   def get_avg_for_and_return_highest(object, storage, is_style)

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit update destroy]
+  before_action :set_user, only: %i[edit update destroy]
+  before_action :set_show_params, only: %i[show]
   before_action :ensure_that_is_admin, only: [:change_status]
 
   # GET /users or /users.json
@@ -71,6 +72,12 @@ class UsersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def set_show_params
+    set_user
+    @memberships = @user.memberships.confirmed
+    @applications = @user.memberships.pending
   end
 
   # Only allow a list of trusted parameters through.

@@ -3,9 +3,29 @@
   <p>
     <strong>Members:</strong>
     <p>
-      <% @beer_club.members.each do |member| %>
+      <% @members.each do |member| %>
         <div>
-          <%= link_to member.username, member %>
+          <%= link_to User.find_by(id: member.user_id).username, user_path(member.user_id) %>
+        </div>
+      <% end %>
+    </p>
+  </p>
+
+    <p>
+    <strong>Membership applications:</strong>
+    <% if @pending.empty?%>
+      <p>No open application to show.</p>
+    <% end %>
+    <p>
+      <% @pending.each do |pending| %>
+        <div>
+          <%= link_to User.find_by(id: pending.user_id).username, user_path(pending.user_id) %>
+          <% if current_user.full_member_of?(@beer_club.id)%>
+            <%= form_with(model: pending, method: :put) do |form| %>
+              <%= form.hidden_field :confirmed, value: true %>
+              <%= form.submit "Confirm", class:'btn btn-primary' %>
+            <% end %>
+          <% end %>
         </div>
       <% end %>
     </p>
@@ -22,7 +42,7 @@
       <% end %>
     <% else %>
       <%= form_with(model: @current_membership, method: :delete) do |form| %>
-        <%= form.submit "End the membership" %>
+        <%= form.submit current_user.full_member_of?(@beer_club.id) ? "End the membership" : "Cancel application"%>
       <% end %>
     <% end %>
     <br>

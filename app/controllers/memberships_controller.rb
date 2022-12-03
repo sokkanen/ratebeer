@@ -27,10 +27,11 @@ class MembershipsController < ApplicationController
   def create
     @membership = Membership.new(membership_params)
     @membership.user_id = current_user.id
+    @membership.confirmed = false
 
     respond_to do |format|
       if @membership.save
-        format.html { redirect_to beer_club_url(@membership.beer_club_id), notice: "#{current_user.username} welcome to the club." }
+        format.html { redirect_to beer_club_url(@membership.beer_club_id), notice: "#{current_user.username} thanks for your interest. Your application will be processed soon." }
         format.json { render :show, status: :created, location: @membership }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -43,7 +44,7 @@ class MembershipsController < ApplicationController
   def update
     respond_to do |format|
       if @membership.update(membership_params)
-        format.html { redirect_to membership_url(@membership), notice: "Membership was successfully updated." }
+        format.html { redirect_to beer_club_url(@membership.beer_club_id), notice: "Membership was successfully updated." }
         format.json { render :show, status: :ok, location: @membership }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -71,7 +72,7 @@ class MembershipsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def membership_params
-    params.require(:membership).permit(:beer_club_id)
+    params.require(:membership).permit(:beer_club_id, :confirmed)
   end
 
   def set_clubs

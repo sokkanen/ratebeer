@@ -1,5 +1,6 @@
 class BeerClubsController < ApplicationController
   before_action :set_beer_club, only: %i[show edit update destroy]
+  before_action :set_creation_params, only: %i[create]
   before_action :ensure_that_signed_in, except: [:index, :show]
   before_action :ensure_that_is_admin, only: [:destroy]
 
@@ -20,6 +21,8 @@ class BeerClubsController < ApplicationController
     @membership = Membership.new
     @membership.beer_club_id = params[:id]
     @current_membership = get_membership(current_user.id, params[:id]) unless current_user.nil?
+    @members = Membership.confirmed.filter { |club| club.beer_club_id == @membership.beer_club_id }
+    @pending = Membership.pending.filter { |club| club.beer_club_id == @membership.beer_club_id }
   end
 
   # GET /beer_clubs/new
@@ -33,10 +36,13 @@ class BeerClubsController < ApplicationController
 
   # POST /beer_clubs or /beer_clubs.json
   def create
-    @beer_club = BeerClub.new(beer_club_params)
+    result = BeerClub.transaction do
+      @beer_club.save!
+      @membership.save!
+    end
 
     respond_to do |format|
-      if @beer_club.save
+      if result
         format.html { redirect_to beer_club_url(@beer_club), notice: "Beer club was successfully created." }
         format.json { render :show, status: :created, location: @beer_club }
       else
@@ -70,6 +76,13 @@ class BeerClubsController < ApplicationController
   end
 
   private
+
+  def set_creation_params
+    @beer_club = BeerClub.new(beer_club_params)
+    @membership = Membership.new(beer_club: @beer_club)
+    @membership.user_id = current_user.id
+    @membership.confirmed = true
+  end
 
   def get_membership(user_id, beer_club_id)
     Membership.find_by user_id:, beer_club_id:
