@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class RatingsController < ApplicationController
+  before_action :expire_brewerylist, only: [:new, :create, :destroy]
+
   def index
     set_variables
   end
@@ -35,5 +37,11 @@ class RatingsController < ApplicationController
     @top_breweries = Brewery.top 3
     @top_styles = Style.top 3
     @most_active = User.most_active
+  end
+
+  private
+  
+  def expire_brewerylist
+    expire_fragment("brewerylist")
   end
 end

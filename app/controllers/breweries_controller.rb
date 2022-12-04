@@ -4,6 +4,7 @@ class BreweriesController < ApplicationController
   before_action :set_brewery, only: %i[show edit update destroy]
   before_action :ensure_that_signed_in, except: [:index, :show, :list]
   before_action :ensure_that_is_admin, only: [:destroy]
+  before_action :expire_brewerylist, only: [:new, :edit, :create, :destroy, :toggle_activity]
 
   def list
     @breweries = Brewery.all
@@ -74,6 +75,10 @@ class BreweriesController < ApplicationController
   end
 
   private
+
+  def expire_brewerylist
+    expire_fragment("brewerylist")
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_brewery
