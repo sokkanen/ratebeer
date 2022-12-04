@@ -59,7 +59,6 @@ class UsersController < ApplicationController
   end
 
   def change_status
-    puts "PERKELE #{params[:id]}"
     user = User.find(params[:id])
     user.update_attribute :closed, !user.closed
 
