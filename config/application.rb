@@ -11,5 +11,9 @@ module Ratebeer
     config.load_defaults 7.0
     config.autoload_paths << Rails.root.join("lib")
     config.eager_load_paths << Rails.root.join("lib")
+    config.active_job.queue_adapter = :sucker_punch
+    config.after_initialize do
+      TopJob.perform_async
+    end
   end
 end

@@ -20,6 +20,8 @@ group :production do
   gem 'pg'
 end
 
+gem 'sucker_punch', '~> 3.0'
+
 gem 'httparty'
 
 # Bcrypt
